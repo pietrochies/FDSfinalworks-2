@@ -33,7 +33,7 @@ public class CardapioController {
     @CrossOrigin("*")
     public CardapioPresenter recuperaCardapio(@PathVariable(value="id")long id){
         CardapioResponse cardapioResponse = recuperaCardapioUC.run(id);
-        Set<Long> conjIdSugestoes = new HashSet<>(cardapioResponse.getSugestoesDoChef().stream()
+        Set<Long> conjIdSugestoes = new HashSet<>(cardapioResponse.getSugestoesDoChef().stream() 
             .map(produto->produto.getId())
             .toList());
         CardapioPresenter cardapioPresenter = new CardapioPresenter(cardapioResponse.getCardapio().getTitulo());
@@ -43,6 +43,13 @@ public class CardapioController {
         }
         return cardapioPresenter;
     }
+
+        @GetMapping("/corrente")//UC 1 seu objetivo é retornar o cardápio corrente, que é o de id 1
+        @CrossOrigin("*")
+        public CardapioPresenter recuperaCardapioCorrente() {
+            
+            return recuperaCardapio(1L);
+        }
 
     @GetMapping("/lista")
     @CrossOrigin("*")
