@@ -1,4 +1,4 @@
-package com.chiespietro.ex4_lancheriaddd_v1.Aplicacao;
+package com.chiespietro.ex4_lancheriaddd_v1.Aplicacao.CasosDeUso;
 
 import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades.Pedido;
 

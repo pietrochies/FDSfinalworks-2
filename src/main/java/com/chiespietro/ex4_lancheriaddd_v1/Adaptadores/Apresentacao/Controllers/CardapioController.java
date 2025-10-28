@@ -1,4 +1,4 @@
-package com.chiespietro.ex4_lancheriaddd_v1.Adaptadores.Apresentacao;
+package com.chiespietro.ex4_lancheriaddd_v1.Adaptadores.Apresentacao.Controllers;
 
 import java.util.HashSet;
 import java.util.List;
