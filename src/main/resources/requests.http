@@ -1,0 +1,11 @@
+### Recuperar cardápio por ID
+GET http://localhost:8080/cardapio/1
+Accept: application/json
+
+### Recuperar cardápio corrente
+GET http://localhost:8080/cardapio/corrente
+Accept: application/json
+
+### Recuperar lista de cardápios
+GET http://localhost:8080/cardapio/lista
+Accept: application/json
