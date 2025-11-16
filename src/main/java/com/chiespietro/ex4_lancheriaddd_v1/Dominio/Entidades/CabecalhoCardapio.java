@@ -1,4 +1,7 @@
 package com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades;
 
-public record CabecalhoCardapio(long id,String titulo) { }
+import jakarta.persistence.*;
+
+@Embeddable
+public record CabecalhoCardapio(long id, String titulo) { }
 

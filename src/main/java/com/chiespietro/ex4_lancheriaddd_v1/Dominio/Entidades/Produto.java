@@ -1,9 +1,21 @@
 package com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "produtos")
 public class Produto {
+    @Id
     private long id;
+    
+    @Column(name = "descricao")
     private String descricao;
+    
+    @ManyToOne
+    @JoinColumn(name = "receita_id")
     private Receita receita;
+    
+    @Column(name = "preco")
     private int preco;
 
     public Produto(long id,String descricao, Receita receita, int preco) {
