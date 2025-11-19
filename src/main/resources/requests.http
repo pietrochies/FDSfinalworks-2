@@ -1,11 +1,72 @@
-### Recuperar cardápio por ID
+### ===== AUTENTICAÇÃO =====
+
+### Registrar novo cliente (público)
+POST http://localhost:8080/auth/registro
+Content-Type: application/json
+
+{
+  "email": "cliente@example.com",
+  "senha": "senha123",
+  "nome": "João Silva"
+}
+
+### Login
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "email": "master@pizzaria.com",
+  "senha": "master123"
+}
+
+### Verificar se está autenticado
+GET http://localhost:8080/auth/verificar
+Accept: application/json
+
+### Logout
+POST http://localhost:8080/auth/logout
+Accept: application/json
+
+### Obter usuário autenticado
+GET http://localhost:8080/auth/usuario
+Accept: application/json
+
+### ===== WELCOME =====
+
+### GET / - Mensagem de boas-vindas
+GET http://localhost:8080/
+Accept: application/json
+
+### ===== USE CASES - CARDÁPIO (Públicos) =====
+
+### UC - RecuperaListaCardapiosUC: Recuperar lista de todos os cardápios
+GET http://localhost:8080/cardapio/lista
+Accept: application/json
+
+### UC - RecuperarCardapioUC: Recuperar cardápio por ID
 GET http://localhost:8080/cardapio/1
 Accept: application/json
 
-### Recuperar cardápio corrente
+### UC - RecuperarCardapioUC: Recuperar cardápio corrente (ID 1)
 GET http://localhost:8080/cardapio/corrente
 Accept: application/json
 
-### Recuperar lista de cardápios
-GET http://localhost:8080/cardapio/lista
+### ===== USE CASES - PEDIDOS (Requer autenticação) =====
+
+### UC - Recuperar pedido por ID
+GET http://localhost:8080/pedidos/1
 Accept: application/json
+
+### UC - PagarPedidoUC: Pagar pedido
+POST http://localhost:8080/pedidos/1/pagar
+Accept: application/json
+
+### UC - SolicitarStatusPedidoUC: Solicitar status do pedido
+GET http://localhost:8080/pedidos/1/status
+Accept: application/json
+
+### UC - CancelarPedidoUC: Cancelar pedido
+POST http://localhost:8080/pedidos/1/cancelar
+Accept: application/json
+
+

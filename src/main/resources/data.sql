@@ -66,3 +66,6 @@ INSERT INTO cardapio_produto (cardapio_id,produto_id) VALUES (1,3);
 
 INSERT INTO cardapio_produto (cardapio_id,produto_id) VALUES (2,1);
 INSERT INTO cardapio_produto (cardapio_id,produto_id) VALUES (2,3);
+
+-- Inserção do usuário MASTER pré-cadastrado
+INSERT INTO usuarios (email, senha, nome, tipo_usuario, ativo) VALUES ('master@lancheria.com', 'master123', 'Administrador', 'MASTER', true);
