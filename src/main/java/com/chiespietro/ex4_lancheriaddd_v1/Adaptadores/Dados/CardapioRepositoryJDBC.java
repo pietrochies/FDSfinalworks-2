@@ -1,60 +1,42 @@
 package com.chiespietro.ex4_lancheriaddd_v1.Adaptadores.Dados;
 
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Dados.CardapioRepository;
-import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Dados.ProdutosRepository;
 import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades.CabecalhoCardapio;
 import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades.Cardapio;
 import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades.Produto;
 
-@Component
-public class CardapioRepositoryJDBC implements CardapioRepository{
-    private JdbcTemplate jdbcTemplate;
-    private ProdutosRepository produtosRepository;
-
-    @Autowired
-    public CardapioRepositoryJDBC(JdbcTemplate jdbcTemplate,ProdutosRepository  produtosRepository){
-        this.jdbcTemplate = jdbcTemplate;
-        this.produtosRepository = produtosRepository;
-    }
+@Repository
+public interface CardapioRepositoryJDBC extends JpaRepository<Cardapio, Long>, CardapioRepository {
 
     @Override
-    public Cardapio recuperaPorId(long id) {
-        String sql = "SELECT id, titulo FROM cardapios WHERE id = ?";
-        List<Cardapio> cardapios = this.jdbcTemplate.query(
-            sql,
-            ps -> ps.setLong(1, id),
-            (rs, rowNum) -> new Cardapio(rs.getLong("id"), rs.getString("titulo"), null)
-        );
-        if (cardapios.isEmpty()) {
-            return null;
-        }
-        Cardapio cardapio = cardapios.getFirst();
-        List<Produto> produtos = produtosRepository.recuperaProdutosCardapio(id);
-        cardapio.setProdutos(produtos);
-        return cardapio;
+    default Cardapio recuperaPorId(long id) {
+        return findById(id).orElse(null);
     }
 
     @Override
     // Por enquanto retorna sempre a pizza de queijo e presunto como indicação do "chef"
-    public List<Produto> indicacoesDoChef() {
-        return List.of(produtosRepository.recuperaProdutoPorid(2L));   
+    default List<Produto> indicacoesDoChef() {
+        Optional<Cardapio> cardapio = findById(1L); // Assumindo que existe cardápio com id 1
+        if (cardapio.isPresent() && cardapio.get().getProdutos() != null) {
+            return cardapio.get().getProdutos().stream().filter(p -> p.getId() == 2L).toList();
+        }
+        return List.of();
     }
 
+    @Query("SELECT c FROM Cardapio c")
+    List<Cardapio> findAllCardapios();
+
     @Override
-    public List<CabecalhoCardapio> cardapiosDisponiveis(){
-        String sql = "SELECT id, titulo FROM cardapios";
-        List<CabecalhoCardapio> cabCardapios = this.jdbcTemplate.query(
-            sql,
-            ps->{},
-            (rs, rowNum) -> new CabecalhoCardapio(rs.getLong("id"), rs.getString("titulo"))
-        );
-        return cabCardapios;
+    default List<CabecalhoCardapio> cardapiosDisponiveis() {
+        return findAllCardapios().stream()
+            .map(c -> new CabecalhoCardapio(c.getId(), c.getTitulo()))
+            .toList();
     }
-    
 }

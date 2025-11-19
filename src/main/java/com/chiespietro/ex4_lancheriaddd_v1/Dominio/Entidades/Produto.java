@@ -1,9 +1,25 @@
 package com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "produtos")
 public class Produto {
+    @Id
     private long id;
+    
+    @Column(name = "descricao")
     private String descricao;
+    
+    @ManyToOne
+    @JoinColumn(name = "receita_id")
     private Receita receita;
+    
+    @ManyToOne
+    @JoinColumn(name = "cardapio_id")
+    private Cardapio cardapio;
+    
+    @Column(name = "preco")
     private int preco;
 
     public Produto(long id,String descricao, Receita receita, int preco) {
@@ -29,6 +45,14 @@ public class Produto {
 
     public Receita getReceita() {
         return receita;
+    }
+
+    public Cardapio getCardapio() {
+        return cardapio;
+    }
+
+    public void setCardapio(Cardapio cardapio) {
+        this.cardapio = cardapio;
     }
 
     public int getPreco() {

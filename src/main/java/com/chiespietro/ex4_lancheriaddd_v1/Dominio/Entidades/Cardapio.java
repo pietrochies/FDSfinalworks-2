@@ -1,19 +1,28 @@
 package com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades;
 
 import java.util.List;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "cardapios")
 public class Cardapio {
-    private CabecalhoCardapio cabecalhoCardapio;
+    @Id
+    private long id;
+    
+    @Column(name = "titulo")
+    private String titulo;
+    
+    @OneToMany(mappedBy = "cardapio", cascade = CascadeType.ALL)
     private List<Produto> produtos;
 
     public Cardapio(long id, String titulo, List<Produto> produtos) {
-        this.cabecalhoCardapio = new CabecalhoCardapio(id,titulo);
+        this.id = id;
+        this.titulo = titulo;
         this.produtos = produtos;
     }
 
-    public long getId() { return cabecalhoCardapio.id(); }
-    public String getTitulo(){ return cabecalhoCardapio.titulo(); }
-    public CabecalhoCardapio getCabecalhoCardapio(){ return cabecalhoCardapio; }
+    public long getId() { return id; }
+    public String getTitulo() { return titulo; }
     public List<Produto> getProdutos() { return produtos; }
-    public void setProdutos(List<Produto> produtos){this.produtos = produtos;}
+    public void setProdutos(List<Produto> produtos) { this.produtos = produtos; }
 }

@@ -12,16 +12,19 @@ import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Servicos.CardapioService;
 
 @Component
 public class RecuperarCardapioUC {
-    private CardapioService cardapioService;
+        private CardapioService cardapioService;
 
-    @Autowired
-    public RecuperarCardapioUC(CardapioService cardapioService){
-        this.cardapioService = cardapioService;
-    }
+            @Autowired
+                public RecuperarCardapioUC(CardapioService cardapioService){
+                            this.cardapioService = cardapioService;
+                }
 
-    public CardapioResponse run(long idCardapio){
-        Cardapio cardapio = cardapioService.recuperaCardapio(idCardapio);
-        List<Produto> sugestoes = cardapioService.recuperaSugestoesDoChef();
-        return new CardapioResponse(cardapio,sugestoes);
-    }
-}
+                    public CardapioResponse run(long idCardapio){
+                                Cardapio cardapio = cardapioService.recuperaCardapio(idCardapio);
+                                        List<Produto> sugestoes = cardapioService.recuperaSugestoesDoChef();
+                                                return new CardapioResponse(cardapio,sugestoes);
+                    }
+                }
+
+                    
+                

@@ -2,7 +2,10 @@ package com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "pedidos")
 public class Pedido {
     public enum Status {
         NOVO,
@@ -15,14 +18,35 @@ public class Pedido {
         ENTREGUE,
         CANCELADO
     }
+    
+    @Id
     private long id;
+    
+    @ManyToOne
+    @JoinColumn(name = "cliente_cpf")
     private Cliente cliente;
+    
+    @Column(name = "data_hora_pagamento")
     private LocalDateTime dataHoraPagamento;
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "pedido_id")
     private List<ItemPedido> itens;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
     private Status status;
+    
+    @Column(name = "valor")
     private double valor;
+    
+    @Column(name = "impostos")
     private double impostos;
+    
+    @Column(name = "desconto")
     private double desconto;
+    
+    @Column(name = "valor_cobrado")
     private double valorCobrado;
 
     public Pedido(long id, Cliente cliente, LocalDateTime dataHoraPagamento, List<ItemPedido> itens,
