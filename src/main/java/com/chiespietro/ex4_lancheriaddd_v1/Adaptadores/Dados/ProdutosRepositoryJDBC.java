@@ -18,6 +18,6 @@ public interface ProdutosRepositoryJDBC extends JpaRepository<Produto, Long>, Pr
     }
 
     @Override
-    @Query("SELECT p FROM Produto p JOIN p.receita r WHERE p.id IN (SELECT cp.produto_id FROM Cardapio c JOIN c.produtos cp WHERE c.id = ?1)")
+    @Query("SELECT p FROM Produto p WHERE p.cardapio.id = ?1")
     List<Produto> recuperaProdutosCardapio(long cardapioId);
 }

@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Dados.CardapioRepository;
-import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Dados.ProdutosRepository;
 import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades.CabecalhoCardapio;
 import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades.Cardapio;
 import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades.Produto;
@@ -31,7 +30,13 @@ public interface CardapioRepositoryJDBC extends JpaRepository<Cardapio, Long>, C
         return List.of();
     }
 
+    @Query("SELECT c FROM Cardapio c")
+    List<Cardapio> findAllCardapios();
+
     @Override
-    @Query("SELECT new com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades.CabecalhoCardapio(c.cabecalhoCardapio.id, c.cabecalhoCardapio.titulo) FROM Cardapio c")
-    List<CabecalhoCardapio> cardapiosDisponiveis();
+    default List<CabecalhoCardapio> cardapiosDisponiveis() {
+        return findAllCardapios().stream()
+            .map(c -> new CabecalhoCardapio(c.getId(), c.getTitulo()))
+            .toList();
+    }
 }
