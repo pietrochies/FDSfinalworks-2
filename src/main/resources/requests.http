@@ -27,42 +27,46 @@ Accept: application/json
 POST http://localhost:8080/auth/logout
 Accept: application/json
 
-### ===== CARDÁPIO (Público - sem autenticação) =====
-
-### Recuperar todos os cardápios
-GET http://localhost:8080/cardapios
+### Obter usuário autenticado
+GET http://localhost:8080/auth/usuario
 Accept: application/json
 
-### Recuperar cardápio por ID
-GET http://localhost:8080/cardapios/1
+### ===== WELCOME =====
+
+### GET / - Mensagem de boas-vindas
+GET http://localhost:8080/
 Accept: application/json
 
-### ===== PRODUTOS (Requer autenticação) =====
+### ===== USE CASES - CARDÁPIO (Públicos) =====
 
-### Recuperar todos os produtos
-GET http://localhost:8080/produtos
+### UC - RecuperaListaCardapiosUC: Recuperar lista de todos os cardápios
+GET http://localhost:8080/cardapio/lista
 Accept: application/json
 
-### Recuperar produto por ID
-GET http://localhost:8080/produtos/1
+### UC - RecuperarCardapioUC: Recuperar cardápio por ID
+GET http://localhost:8080/cardapio/1
 Accept: application/json
 
-### ===== RECEITAS (Requer autenticação) =====
-
-### Recuperar todas as receitas
-GET http://localhost:8080/receitas
+### UC - RecuperarCardapioUC: Recuperar cardápio corrente (ID 1)
+GET http://localhost:8080/cardapio/corrente
 Accept: application/json
 
-### Recuperar receita por ID
-GET http://localhost:8080/receitas/1
+### ===== USE CASES - PEDIDOS (Requer autenticação) =====
+
+### UC - Recuperar pedido por ID
+GET http://localhost:8080/pedidos/1
 Accept: application/json
 
-### ===== INGREDIENTES (Requer autenticação) =====
-
-### Recuperar todos os ingredientes
-GET http://localhost:8080/ingredientes
+### UC - PagarPedidoUC: Pagar pedido
+POST http://localhost:8080/pedidos/1/pagar
 Accept: application/json
 
-### Recuperar ingrediente por ID
-GET http://localhost:8080/ingredientes/1
+### UC - SolicitarStatusPedidoUC: Solicitar status do pedido
+GET http://localhost:8080/pedidos/1/status
 Accept: application/json
+
+### UC - CancelarPedidoUC: Cancelar pedido
+POST http://localhost:8080/pedidos/1/cancelar
+Accept: application/json
+
+
