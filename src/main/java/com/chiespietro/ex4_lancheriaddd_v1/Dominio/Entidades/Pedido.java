@@ -7,7 +7,6 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "pedidos")
 public class Pedido {
-    @Enumerated(EnumType.STRING)
     public enum Status {
         NOVO,
         APROVADO,

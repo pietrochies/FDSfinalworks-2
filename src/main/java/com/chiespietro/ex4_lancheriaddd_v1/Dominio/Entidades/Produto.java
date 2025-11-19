@@ -15,6 +15,10 @@ public class Produto {
     @JoinColumn(name = "receita_id")
     private Receita receita;
     
+    @ManyToOne
+    @JoinColumn(name = "cardapio_id")
+    private Cardapio cardapio;
+    
     @Column(name = "preco")
     private int preco;
 
@@ -41,6 +45,14 @@ public class Produto {
 
     public Receita getReceita() {
         return receita;
+    }
+
+    public Cardapio getCardapio() {
+        return cardapio;
+    }
+
+    public void setCardapio(Cardapio cardapio) {
+        this.cardapio = cardapio;
     }
 
     public int getPreco() {
