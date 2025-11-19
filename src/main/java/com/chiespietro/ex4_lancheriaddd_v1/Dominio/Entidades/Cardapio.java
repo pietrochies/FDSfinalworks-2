@@ -12,8 +12,15 @@ public class Cardapio {
     @Column(name = "titulo")
     private String titulo;
     
-    @OneToMany(mappedBy = "cardapio", cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "cardapio_produto",
+        joinColumns = @JoinColumn(name = "cardapio_id"),
+        inverseJoinColumns = @JoinColumn(name = "produto_id")
+    )
     private List<Produto> produtos;
+
+    public Cardapio() {}
 
     public Cardapio(long id, String titulo, List<Produto> produtos) {
         this.id = id;
@@ -26,3 +33,4 @@ public class Cardapio {
     public List<Produto> getProdutos() { return produtos; }
     public void setProdutos(List<Produto> produtos) { this.produtos = produtos; }
 }
+

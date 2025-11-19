@@ -1,11 +1,68 @@
+### ===== AUTENTICAÇÃO =====
+
+### Registrar novo cliente (público)
+POST http://localhost:8080/auth/registro
+Content-Type: application/json
+
+{
+  "email": "cliente@example.com",
+  "senha": "senha123",
+  "nome": "João Silva"
+}
+
+### Login
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "email": "master@pizzaria.com",
+  "senha": "master123"
+}
+
+### Verificar se está autenticado
+GET http://localhost:8080/auth/verificar
+Accept: application/json
+
+### Logout
+POST http://localhost:8080/auth/logout
+Accept: application/json
+
+### ===== CARDÁPIO (Público - sem autenticação) =====
+
+### Recuperar todos os cardápios
+GET http://localhost:8080/cardapios
+Accept: application/json
+
 ### Recuperar cardápio por ID
-GET http://localhost:8080/cardapio/1
+GET http://localhost:8080/cardapios/1
 Accept: application/json
 
-### Recuperar cardápio corrente
-GET http://localhost:8080/cardapio/corrente
+### ===== PRODUTOS (Requer autenticação) =====
+
+### Recuperar todos os produtos
+GET http://localhost:8080/produtos
 Accept: application/json
 
-### Recuperar lista de cardápios
-GET http://localhost:8080/cardapio/lista
+### Recuperar produto por ID
+GET http://localhost:8080/produtos/1
+Accept: application/json
+
+### ===== RECEITAS (Requer autenticação) =====
+
+### Recuperar todas as receitas
+GET http://localhost:8080/receitas
+Accept: application/json
+
+### Recuperar receita por ID
+GET http://localhost:8080/receitas/1
+Accept: application/json
+
+### ===== INGREDIENTES (Requer autenticação) =====
+
+### Recuperar todos os ingredientes
+GET http://localhost:8080/ingredientes
+Accept: application/json
+
+### Recuperar ingrediente por ID
+GET http://localhost:8080/ingredientes/1
 Accept: application/json

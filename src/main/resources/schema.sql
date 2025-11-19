@@ -63,3 +63,13 @@ create table if not exists cardapio_produto (
   foreign key (cardapio_id) references cardapios(id),
   foreign key (produto_id) references produtos(id)
 );
+
+-- Tabela de Usuários
+create table if not exists usuarios (
+  id bigint primary key auto_increment,
+  email varchar(255) not null unique,
+  senha varchar(255) not null,
+  nome varchar(255) not null,
+  tipo_usuario varchar(20) not null,
+  ativo boolean not null default true
+);

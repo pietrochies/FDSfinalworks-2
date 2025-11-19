@@ -1,0 +1,48 @@
+### ===== AUTENTICAÇÃO (Público) =====
+
+### Registrar novo cliente
+POST http://localhost:8080/auth/registro
+Content-Type: application/json
+
+{
+  "email": "cliente@example.com",
+  "senha": "senha123",
+  "nome": "João Silva"
+}
+
+### Login
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "email": "master@pizzaria.com",
+  "senha": "master123"
+}
+
+### Logout
+POST http://localhost:8080/auth/logout
+
+### ===== UCs DO SISTEMA =====
+
+### UC: RecuperarCardapioUC - Recupera um cardápio por ID
+GET http://localhost:8080/uc/cardapio/1
+
+### UC: PagarPedidoUC - Pagar um pedido
+POST http://localhost:8080/uc/pedido/1/pagar
+
+### UC: CriarPedidoUC - Criar novo pedido
+POST http://localhost:8080/uc/pedido/criar
+Content-Type: application/json
+
+{
+  "cardapioId": 1
+}
+
+### UC: ConsultarPedidoUC - Consultar status do pedido
+GET http://localhost:8080/uc/pedido/1
+
+### UC: RecuperarReceitaUC - Recupera uma receita por ID
+GET http://localhost:8080/uc/receita/1
+
+### UC: RecuperarProdutoUC - Recupera um produto por ID
+GET http://localhost:8080/uc/produto/1
