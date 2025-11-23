@@ -1,8 +1,11 @@
 package com.chiespietro.ex4_lancheriaddd_v1.Dominio.Servicos;
 
+import org.springframework.stereotype.Service;
+
 import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades.Pedido;
 import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades.ItemPedido;
 
+@Service
 public class PedidoService {
     /**
      * Calcula o custo final do pedido, aplicando desconto e impostos conforme regras de negócio.

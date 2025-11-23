@@ -1,7 +1,10 @@
 package com.chiespietro.ex4_lancheriaddd_v1.Aplicacao;
 
+import org.springframework.stereotype.Component;
+
 import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades.Pedido;
 
+@Component
 public class SolicitarStatusPedidoUC {
     
 

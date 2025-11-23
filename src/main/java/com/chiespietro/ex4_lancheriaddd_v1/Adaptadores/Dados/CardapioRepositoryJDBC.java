@@ -21,6 +21,11 @@ public interface CardapioRepositoryJDBC extends JpaRepository<Cardapio, Long>, C
     }
 
     @Override
+    default Cardapio salvar(Cardapio cardapio) {
+        return save(cardapio);
+    }
+
+    @Override
     // Por enquanto retorna sempre a pizza de queijo e presunto como indicação do "chef"
     default List<Produto> indicacoesDoChef() {
         Optional<Cardapio> cardapio = findById(1L); // Assumindo que existe cardápio com id 1

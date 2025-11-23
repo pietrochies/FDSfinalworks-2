@@ -51,6 +51,11 @@ Accept: application/json
 GET http://localhost:8080/cardapio/corrente
 Accept: application/json
 
+### UC - DefinirCardapioAtivoUC: Definir cardápio como ativo (Apenas MASTER)
+### IMPORTANTE: Faça login como master@pizzaria.com antes de executar
+POST http://localhost:8080/cardapio/1/ativar
+Accept: application/json
+
 ### ===== USE CASES - PEDIDOS (Requer autenticação) =====
 
 ### UC - Recuperar pedido por ID

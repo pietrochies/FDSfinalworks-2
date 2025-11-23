@@ -12,6 +12,9 @@ public class Cardapio {
     @Column(name = "titulo")
     private String titulo;
     
+    @Column(name = "ativo", nullable = false)
+    private boolean ativo = false;
+    
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "cardapio_produto",
@@ -26,11 +29,15 @@ public class Cardapio {
         this.id = id;
         this.titulo = titulo;
         this.produtos = produtos;
+        this.ativo = false;
     }
 
     public long getId() { return id; }
     public String getTitulo() { return titulo; }
     public List<Produto> getProdutos() { return produtos; }
     public void setProdutos(List<Produto> produtos) { this.produtos = produtos; }
+    
+    public boolean isAtivo() { return ativo; }
+    public void setAtivo(boolean ativo) { this.ativo = ativo; }
 }
 
