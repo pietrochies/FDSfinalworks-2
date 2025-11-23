@@ -1,14 +1,19 @@
 package com.chiespietro.ex4_lancheriaddd_v1.Aplicacao;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades.Pedido;
 import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Repositorios.PedidoRepository;
 import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Servicos.CozinhaService;
 
+@Component
 public class PagarPedidoUC {
 
     private final PedidoRepository pedidoRepository;
     private final CozinhaService cozinhaService;
 
+    @Autowired
     public PagarPedidoUC(PedidoRepository pedidoRepository, CozinhaService cozinhaService) {
         this.pedidoRepository = pedidoRepository;
         this.cozinhaService = cozinhaService;

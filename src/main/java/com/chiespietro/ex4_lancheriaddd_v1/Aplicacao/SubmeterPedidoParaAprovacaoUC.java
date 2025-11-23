@@ -1,5 +1,8 @@
 package com.chiespietro.ex4_lancheriaddd_v1.Aplicacao;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades.Pedido;
 import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades.ItemPedido;
 import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades.Cliente;
@@ -7,11 +10,13 @@ import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Servicos.PedidoService;
 import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Servicos.EstoqueService;
 import java.util.List;
 
+@Component
 public class SubmeterPedidoParaAprovacaoUC {
 
     private PedidoService pedidoService;
     private EstoqueService estoqueService;
 
+    @Autowired
     public SubmeterPedidoParaAprovacaoUC(PedidoService pedidoService, EstoqueService estoqueService) {
         this.pedidoService = pedidoService;
         this.estoqueService = estoqueService;

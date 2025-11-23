@@ -7,26 +7,36 @@ import java.util.Set;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chiespietro.ex4_lancheriaddd_v1.Adaptadores.Apresentacao.Presenters.CabecalhoCardapioPresenter;
 import com.chiespietro.ex4_lancheriaddd_v1.Adaptadores.Apresentacao.Presenters.CardapioPresenter;
+import com.chiespietro.ex4_lancheriaddd_v1.Aplicacao.DefinirCardapioAtivoUC;
 import com.chiespietro.ex4_lancheriaddd_v1.Aplicacao.RecuperaListaCardapiosUC;
 import com.chiespietro.ex4_lancheriaddd_v1.Aplicacao.RecuperarCardapioUC;
 import com.chiespietro.ex4_lancheriaddd_v1.Aplicacao.Responses.CardapioResponse;
+import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades.Cardapio;
 import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades.Produto;
+import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Servicos.AutenticacaoService;
 
 @RestController
 @RequestMapping("/cardapio")
 public class CardapioController {
     private RecuperarCardapioUC recuperaCardapioUC;
     private RecuperaListaCardapiosUC recuperaListaCardapioUC;
+    private DefinirCardapioAtivoUC definirCardapioAtivoUC;
+    private AutenticacaoService autenticacaoService;
 
     public CardapioController(RecuperarCardapioUC recuperaCardapioUC,
-                              RecuperaListaCardapiosUC recuperaListaCardapioUC) {
+                              RecuperaListaCardapiosUC recuperaListaCardapioUC,
+                              DefinirCardapioAtivoUC definirCardapioAtivoUC,
+                              AutenticacaoService autenticacaoService) {
         this.recuperaCardapioUC = recuperaCardapioUC;
         this.recuperaListaCardapioUC = recuperaListaCardapioUC;
+        this.definirCardapioAtivoUC = definirCardapioAtivoUC;
+        this.autenticacaoService = autenticacaoService;
     }
 
     @GetMapping("/{id}")
@@ -59,5 +69,17 @@ public class CardapioController {
             .map(cabCar -> new CabecalhoCardapioPresenter(cabCar.id(),cabCar.titulo()))
             .toList();
          return lstCardapios;
+    }
+
+    @PostMapping("/{id}/ativar")
+    @CrossOrigin("*")
+    public CardapioPresenter definirCardapioAtivo(@PathVariable(value="id") long id) {
+        try {
+            var usuarioAutenticado = autenticacaoService.getUsuarioAutenticado();
+            Cardapio cardapioAtualizado = definirCardapioAtivoUC.executar(usuarioAutenticado, id);
+            return recuperaCardapio(cardapioAtualizado.getId());
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 }
