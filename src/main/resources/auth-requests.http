@@ -27,6 +27,24 @@ POST http://localhost:8080/auth/logout
 ### UC: RecuperarCardapioUC - Recupera um cardápio por ID
 GET http://localhost:8080/uc/cardapio/1
 
+### UC: CriarPedidoUC - Criar novo pedido
+POST http://localhost:8080/pedidos/criar
+Content-Type: application/json
+
+{
+  "clienteCpf": "12345678900",
+  "itens": [
+    {
+      "produtoId": 1,
+      "quantidade": 2
+    },
+    {
+      "produtoId": 2,
+      "quantidade": 1
+    }
+  ]
+}
+
 ### UC: PagarPedidoUC - Pagar um pedido
 POST http://localhost:8080/pedidos/1/pagar
 
@@ -39,11 +57,3 @@ GET http://localhost:8080/pedidos/1/status
 ### UC: Cancelar Pedido
 POST http://localhost:8080/pedidos/1/cancelar
 
-### UC: RecuperarReceitaUC - Recupera uma receita por ID
-GET http://localhost:8080/uc/receita/1
-
-### UC: RecuperarProdutoUC - Recupera um produto por ID
-GET http://localhost:8080/uc/produto/1
-
-### NOTA: CriarPedidoUC - Ainda não possui endpoint implementado
-### TODO: Implementar POST /pedidos/criar
