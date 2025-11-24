@@ -69,3 +69,7 @@ INSERT INTO cardapio_produto (cardapio_id,produto_id) VALUES (2,3);
 
 -- Inserção do usuário MASTER pré-cadastrado
 INSERT INTO usuarios (email, senha, nome, tipo_usuario, ativo) VALUES ('master@lancheria.com', 'master123', 'Administrador', 'MASTER', true);
+
+-- Inserção dos descontos
+INSERT INTO descontos (codigo, descricao, percentual, ativo) VALUES ('ClienteFrequente', 'Desconto para cliente frequente (mais de 3 pedidos em 20 dias)', 7.0, true);
+INSERT INTO descontos (codigo, descricao, percentual, ativo) VALUES ('ClienteGastador', 'Desconto para cliente que gastou mais de R$ 500 em 30 dias', 15.0, true);

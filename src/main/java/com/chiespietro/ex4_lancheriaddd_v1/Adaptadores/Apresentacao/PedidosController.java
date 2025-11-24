@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpSession;
 import com.chiespietro.ex4_lancheriaddd_v1.Aplicacao.PagarPedidoUC;
 import com.chiespietro.ex4_lancheriaddd_v1.Aplicacao.CancelarPedidoUC;
 import com.chiespietro.ex4_lancheriaddd_v1.Aplicacao.SolicitarStatusPedidoUC;
-import com.chiespietro.ex4_lancheriaddd_v1.Aplicacao.SubmeterPedidoParaAprovacaoUC;
 import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades.Pedido;
 import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Repositorios.PedidoRepository;
 

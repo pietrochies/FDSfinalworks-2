@@ -48,6 +48,10 @@ public class Pedido {
     
     @Column(name = "valor_cobrado")
     private double valorCobrado;
+    
+    @ManyToOne
+    @JoinColumn(name = "desconto_id")
+    private Desconto descontoAplicado;
 
     public Pedido(long id, Cliente cliente, LocalDateTime dataHoraPagamento, List<ItemPedido> itens,
             Pedido.Status status, double valor, double impostos, double desconto, double valorCobrado) {
@@ -90,15 +94,39 @@ public class Pedido {
         return valor;
     }
 
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
     public double getImpostos() {
         return impostos;
+    }
+
+    public void setImpostos(double impostos) {
+        this.impostos = impostos;
     }
 
     public double getDesconto() {
         return desconto;
     }
 
+    public void setDesconto(double desconto) {
+        this.desconto = desconto;
+    }
+
     public double getValorCobrado() {
         return valorCobrado;
+    }
+
+    public void setValorCobrado(double valorCobrado) {
+        this.valorCobrado = valorCobrado;
+    }
+
+    public Desconto getDescontoAplicado() {
+        return descontoAplicado;
+    }
+
+    public void setDescontoAplicado(Desconto descontoAplicado) {
+        this.descontoAplicado = descontoAplicado;
     }
 }

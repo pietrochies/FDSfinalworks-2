@@ -73,3 +73,37 @@ create table if not exists usuarios (
   tipo_usuario varchar(20) not null,
   ativo boolean not null default true
 );
+
+-- Tabela de Descontos
+create table if not exists descontos (
+  id bigint primary key auto_increment,
+  codigo varchar(100) not null unique,
+  descricao varchar(255),
+  percentual double not null,
+  ativo boolean not null default true
+);
+
+-- Tabela de Pedidos
+create table if not exists pedidos (
+  id bigint primary key,
+  cliente_cpf varchar(15) not null,
+  data_hora_pagamento timestamp,
+  status varchar(50) not null,
+  valor double,
+  impostos double,
+  desconto double,
+  valor_cobrado double,
+  desconto_id bigint,
+  foreign key (cliente_cpf) references clientes(cpf),
+  foreign key (desconto_id) references descontos(id)
+);
+
+-- Tabela de Itens do Pedido
+create table if not exists item_pedido (
+  id bigint primary key,
+  pedido_id bigint not null,
+  produto_id bigint not null,
+  quantidade int not null,
+  foreign key (pedido_id) references pedidos(id),
+  foreign key (produto_id) references produtos(id)
+);
