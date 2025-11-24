@@ -1,5 +1,6 @@
 package com.chiespietro.ex4_lancheriaddd_v1.Adaptadores.Dados;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -37,5 +38,10 @@ public class DescontoRepositoryAdapter implements DescontoRepository {
         if (desconto != null) {
             descontoRepositoryJDBC.save(desconto);
         }
+    }
+
+    @Override
+    public List<Desconto> findAll() {
+        return descontoRepositoryJDBC.findAll();
     }
 }

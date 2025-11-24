@@ -53,6 +53,10 @@ public class Usuario {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -79,6 +83,18 @@ public class Usuario {
 
     public TipoUsuario getTipoUsuario() {
         return tipoUsuario;
+    }
+
+    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuarioStr) {
+        this.tipoUsuario = TipoUsuario.valueOf(tipoUsuarioStr.toUpperCase());
+    }
+
+    public boolean isPerfil(String perfil) {
+        return this.tipoUsuario.toString().equals(perfil.toUpperCase());
     }
 
     public boolean isAtivo() {

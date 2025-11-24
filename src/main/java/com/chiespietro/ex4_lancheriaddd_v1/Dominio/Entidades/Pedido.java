@@ -53,6 +53,8 @@ public class Pedido {
     @JoinColumn(name = "desconto_id")
     private Desconto descontoAplicado;
 
+    public Pedido() {}
+
     public Pedido(long id, Cliente cliente, LocalDateTime dataHoraPagamento, List<ItemPedido> itens,
             Pedido.Status status, double valor, double impostos, double desconto, double valorCobrado) {
         this.id = id;

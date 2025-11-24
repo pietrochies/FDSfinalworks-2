@@ -32,6 +32,10 @@ public class CriarPedidoUC {
         if (cliente == null) {
             throw new IllegalArgumentException("Cliente não pode ser nulo");
         }
+        
+        if (cliente.getCpf() == null || cliente.getCpf().isEmpty()) {
+            throw new IllegalArgumentException("CPF do cliente não pode ser vazio");
+        }
 
         // 2. Valida e recupera os produtos, calculando o valor total
         List<ItemPedido> itens = new ArrayList<>();
@@ -74,8 +78,6 @@ public class CriarPedidoUC {
 
         // 5. Persiste o pedido
         pedidoRepository.save(pedido);
-
-        System.out.println("Pedido criado com sucesso: " + pedido.getId());
         return pedido;
     }
 

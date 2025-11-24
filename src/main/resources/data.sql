@@ -1,6 +1,9 @@
 -- Inserção dos clientes
 INSERT INTO clientes (cpf, nome, celular, endereco, email) VALUES ('9001', 'Huguinho Pato', '51985744566', 'Rua das Flores, 100', 'huguinho.pato@email.com');
 INSERT INTO clientes (cpf, nome, celular, endereco, email) VALUES ('9002', 'Luizinho Pato', '5199172079', 'Av. Central, 200', 'zezinho.pato@email.com');
+INSERT INTO clientes (cpf, nome, celular, endereco, email) VALUES ('10001', 'Cliente Teste Frequente', '51999999999', 'Rua Teste, 300', 'cliente.frequente@email.com');
+INSERT INTO clientes (cpf, nome, celular, endereco, email) VALUES ('10002', 'Cliente Teste Gastador', '51988888888', 'Rua Teste, 400', 'cliente.gastador@email.com');
+INSERT INTO clientes (cpf, nome, celular, endereco, email) VALUES ('10003', 'Cliente Teste Normal', '51977777777', 'Rua Teste, 500', 'cliente.normal@email.com');
 
 -- Inserção dos ingredientes
 INSERT INTO ingredientes (id, descricao) VALUES (1, 'Disco de pizza');

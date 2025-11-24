@@ -20,7 +20,7 @@ public class Produto {
 
     public Produto() {}
 
-    public Produto(long id,String descricao, Receita receita, int preco) {
+    public Produto(long id, String descricao, Receita receita, int preco) {
         if (!Produto.precoValido(preco))
             throw new IllegalArgumentException("Preco invalido: " + preco);
         if (descricao == null || descricao.length() == 0)
@@ -31,6 +31,18 @@ public class Produto {
         this.descricao = descricao;
         this.receita = receita;
         this.preco = preco;
+    }
+
+    // Construtor simplificado para testes (sem receita)
+    public Produto(long id, String descricao, long preco) {
+        if (!Produto.precoValido((int) preco))
+            throw new IllegalArgumentException("Preco invalido: " + preco);
+        if (descricao == null || descricao.length() == 0)
+            throw new IllegalArgumentException("Descricao invalida");
+        this.id = id;
+        this.descricao = descricao;
+        this.receita = null;
+        this.preco = (int) preco;
     }
 
     public long getId(){
