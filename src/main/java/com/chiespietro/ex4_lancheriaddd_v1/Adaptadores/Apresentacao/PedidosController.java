@@ -9,9 +9,11 @@ import jakarta.servlet.http.HttpSession;
 import com.chiespietro.ex4_lancheriaddd_v1.Aplicacao.PagarPedidoUC;
 import com.chiespietro.ex4_lancheriaddd_v1.Aplicacao.CancelarPedidoUC;
 import com.chiespietro.ex4_lancheriaddd_v1.Aplicacao.SolicitarStatusPedidoUC;
-import com.chiespietro.ex4_lancheriaddd_v1.Aplicacao.SubmeterPedidoParaAprovacaoUC;
+import com.chiespietro.ex4_lancheriaddd_v1.Aplicacao.CriarPedidoUC;
 import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades.Pedido;
+import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades.Cliente;
 import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Repositorios.PedidoRepository;
+import com.chiespietro.ex4_lancheriaddd_v1.Adaptadores.Apresentacao.DTOs.CriarPedidoRequest;
 
 @RestController
 @RequestMapping("/pedidos")
@@ -22,17 +24,20 @@ public class PedidosController {
     private PagarPedidoUC pagarPedidoUC;
     private CancelarPedidoUC cancelarPedidoUC;
     private SolicitarStatusPedidoUC solicitarStatusPedidoUC;
+    private CriarPedidoUC criarPedidoUC;
 
     @Autowired
     public PedidosController(
             PedidoRepository pedidoRepository,
             PagarPedidoUC pagarPedidoUC,
             CancelarPedidoUC cancelarPedidoUC,
-            SolicitarStatusPedidoUC solicitarStatusPedidoUC) {
+            SolicitarStatusPedidoUC solicitarStatusPedidoUC,
+            CriarPedidoUC criarPedidoUC) {
         this.pedidoRepository = pedidoRepository;
         this.pagarPedidoUC = pagarPedidoUC;
         this.cancelarPedidoUC = cancelarPedidoUC;
         this.solicitarStatusPedidoUC = solicitarStatusPedidoUC;
+        this.criarPedidoUC = criarPedidoUC;
     }
 
     /**
@@ -55,6 +60,48 @@ public class PedidosController {
             }
 
             return ResponseEntity.ok(pedido);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("{\"erro\": \"" + e.getMessage() + "\"}");
+        }
+    }
+
+    /**
+     * POST /pedidos/criar - Criar novo pedido (UC - CriarPedidoUC)
+     */
+    @PostMapping("/criar")
+    public ResponseEntity<?> criarPedido(@RequestBody CriarPedidoRequest request, HttpSession session) {
+        try {
+            // Verifica autenticação
+            Long usuarioId = (Long) session.getAttribute("usuarioId");
+            if (usuarioId == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("{\"erro\": \"Usuário não autenticado\"}");
+            }
+
+            // Cria objeto Cliente a partir do CPF (pode ser expandido para recuperar dados completos)
+            Cliente cliente = new Cliente(
+                request.getClienteCpf(),
+                "", // nome será preenchido posteriormente
+                "", // celular
+                "", // endereço
+                ""  // email
+            );
+
+            // Converte os DTOs para o formato esperado pelo UC
+            java.util.List<CriarPedidoUC.ItemPedidoRequest> itens = new java.util.ArrayList<>();
+            for (CriarPedidoRequest.ItemPedidoDTO item : request.getItens()) {
+                itens.add(new CriarPedidoUC.ItemPedidoRequest(item.getProdutoId(), item.getQuantidade()));
+            }
+
+            // Executa o UC
+            Pedido pedidoCriado = criarPedidoUC.executar(cliente, itens);
+
+            return ResponseEntity.status(HttpStatus.CREATED)
+                .body(new CriarPedidoUC.CriarPedidoResponse(pedidoCriado));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body("{\"erro\": \"" + e.getMessage() + "\"}");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body("{\"erro\": \"" + e.getMessage() + "\"}");

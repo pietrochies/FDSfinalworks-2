@@ -9,10 +9,6 @@ import com.chiespietro.ex4_lancheriaddd_v1.Adaptadores.Dados.CardapioRepositoryJ
 import com.chiespietro.ex4_lancheriaddd_v1.Adaptadores.Dados.ProdutosRepositoryJDBC;
 import com.chiespietro.ex4_lancheriaddd_v1.Adaptadores.Dados.ReceitasRepositoryJDBC;
 import com.chiespietro.ex4_lancheriaddd_v1.Adaptadores.Dados.IngredientesRepositoryJDBC;
-import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades.Cardapio;
-import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades.Produto;
-import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades.Receita;
-import com.chiespietro.ex4_lancheriaddd_v1.Dominio.Entidades.Ingrediente;
 
 import static org.junit.jupiter.api.Assertions.*;
 

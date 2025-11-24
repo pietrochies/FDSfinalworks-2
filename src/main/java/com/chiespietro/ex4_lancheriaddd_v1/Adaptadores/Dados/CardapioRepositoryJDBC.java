@@ -22,6 +22,9 @@ public interface CardapioRepositoryJDBC extends JpaRepository<Cardapio, Long>, C
 
     @Override
     default Cardapio salvar(Cardapio cardapio) {
+        if (cardapio == null) {
+            return null;
+        }
         return save(cardapio);
     }
 

@@ -12,6 +12,9 @@ public interface UsuarioRepositoryJDBC extends JpaRepository<Usuario, Long>, Usu
     
     @Override
     default Usuario salvar(Usuario usuario) {
+        if (usuario == null) {
+            return null;
+        }
         return save(usuario);
     }
     

@@ -29,7 +29,7 @@ public class SubmeterPedidoParaAprovacaoUC {
         }
         // 2. Criar o pedido com status APROVADO
         Pedido pedido = new Pedido(0, cliente, null, itens, Pedido.Status.APROVADO, 0, 0, 0, 0);
-        double precoFinal = pedidoService.calcularCustoFinal(pedido, pedidosUltimos20Dias);
+        double precoFinal = pedidoService.calcularCustoFinal(pedido);
         // 3. Atualizar valores do pedido
         // (Você pode criar setters ou um método para atualizar esses campos)
         // 4. Retornar resultado aprovado
